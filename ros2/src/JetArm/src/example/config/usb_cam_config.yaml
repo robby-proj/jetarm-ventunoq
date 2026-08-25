@@ -1,0 +1,21 @@
+camera_resolution:
+  height: 480
+  width: 640
+hand2cam_tf_matrix:
+- - 0
+  - 0
+  - 1
+  - -0.101
+- - -1
+  - 0
+  - 0
+  - 0
+- - 0
+  - -1
+  - 0
+  - 0.045
+- - 0
+  - 0
+  - 0
+  - 1
+

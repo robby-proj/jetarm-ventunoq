@@ -1,0 +1,13 @@
+﻿#BNF+IAT 1.0 UTF-8;
+!grammar call;
+
+!start <callstart>;
+
+<callstart>:<move>|<moveen>|<rgbd>|<rgbden>|<action>|<actionen>;
+<move>:(开始|停止)按形状(分类|分拣)目标|移除高度异常目标|(开始|停止)移除高度异常目标;
+<moveen>:(start|stop) recognition (sorting) object|remove highly abnormal targets;
+<rgbd>:分拣(三维|空间)(红色|绿色|蓝色);
+<rgbden>:sorting (3D|space) (red|green|blue);
+<action>:(开启|开始|关闭|停止)颜色(识别|分拣|追踪)|追踪(红色|绿色|蓝色)|分拣(红色|蓝色|绿色)|停止(追踪|分拣|分类|移除|处理)|(开启|关闭)垃圾分类;
+<actionen>:(start|stop) recognition|(start|stop) color (sorting|tracking)|tracking (red|green|blue) object|sorting (red|green|blue) object|stop (recognition|sorting|tracking|processing)|(start|stop) classification;
+

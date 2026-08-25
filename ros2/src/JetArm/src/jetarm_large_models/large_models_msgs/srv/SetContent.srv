@@ -1,0 +1,8 @@
+string model
+string api_key
+string base_url
+string prompt
+string query
+---
+bool success
+string message

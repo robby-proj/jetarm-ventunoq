@@ -1,0 +1,38 @@
+/app_lab_face_tracking_bridge:
+  ros__parameters:
+    listen_host: "0.0.0.0"
+    listen_port: 5600
+
+    pan_servo_id: 1
+    tilt_servo_id: 4
+
+    pan_center: 500
+    tilt_center: 200
+
+    pan_min: 425
+    pan_max: 575
+    tilt_min: 150
+    tilt_max: 300
+
+    invert_pan: true
+    invert_tilt: true
+
+    pan_gain: 55.0
+    tilt_gain: 12.0
+
+    deadband_x: 0.06
+    deadband_y: 0.08
+
+    smoothing_alpha_x: 0.22
+    smoothing_alpha_y: 0.15
+
+    pan_max_step: 10
+    tilt_max_step: 5
+
+    minimum_servo_change: 2
+
+    control_interval: 0.03
+    movement_duration: 0.06
+
+    face_timeout: 0.5
+    start_armed: false

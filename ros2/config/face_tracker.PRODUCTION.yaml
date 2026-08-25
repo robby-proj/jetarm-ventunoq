@@ -1,0 +1,49 @@
+/app_lab_face_tracking_bridge:
+  ros__parameters:
+
+    listen_host: "0.0.0.0"
+    listen_port: 5600
+
+    pan_servo_id: 1
+    tilt_servo_id: 4
+
+    pan_center: 500
+    tilt_center: 200
+
+    # Keep the safe mechanical envelope
+    pan_min: 225
+    pan_max: 775
+
+    tilt_min: 120
+    tilt_max: 400
+
+    invert_pan: true
+    invert_tilt: true
+
+    # Much faster response
+    pan_gain: 130.0
+    tilt_gain: 50.0
+
+    # Smaller deadband = react sooner
+    deadband_x: 0.025
+    deadband_y: 0.030
+
+    # Much less damping / lag
+    smoothing_alpha_x: 0.70
+    smoothing_alpha_y: 0.55
+
+    # Fast but still bounded
+    pan_max_step: 32
+    tilt_max_step: 19
+
+    minimum_servo_change: 1
+
+    # Allow fast fresh detections
+    control_interval: 0.010
+
+    # Faster servo interpolation
+    movement_duration: 0.090
+
+    face_timeout: 0.30
+
+    start_armed: false

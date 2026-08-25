@@ -1,0 +1,10 @@
+name: Arduino AI RoboArm Studio V1.2
+description: This example showcases face detection within a live feed from a USB camera.
+ports: []
+bricks:
+- arduino:video_object_detection:
+    model: face-detection-qnn
+- arduino:web_ui: {}
+- arduino:asr:
+    model: whisper-small-quantized
+icon: 🦾

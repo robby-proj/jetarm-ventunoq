@@ -1,0 +1,39 @@
+# Arduino App Lab generated runtime/cache
+app_lab/.cache/
+.cache/
+
+# ROS generated directories
+build/
+install/
+log/
+
+# Python generated files
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Credentials
+.env
+.env.*
+*.key
+*.pem
+*.crt
+*credentials*
+*secret*
+*token*
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak

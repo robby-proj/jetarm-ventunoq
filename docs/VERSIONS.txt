@@ -1,0 +1,17 @@
+=== JetArm Ventuno Q working snapshot ===
+Tue Aug 25 09:27:55 PM UTC 2026
+
+=== ROS bridge ===
+0a4f9bfeea0d31cb46b1691ff15febf673e26666bd96b511a0440f24c3a48cb6  ros2/app_lab_ros_bridge.py
+
+=== Production tracking YAML ===
+6d75ba0035ec1bb3bc966e5ee2b5dcb1e52d6a5db3b2a3a5dfd4f33f2d91c975  ros2/config/face_tracker.PRODUCTION.yaml
+
+=== App Lab main.py ===
+f372afd30894e8f2e1b9b0cfbb5c84cd00a91789c1a56eb41a2e657ca2978907  app_lab/python/main.py
+
+=== OS ===
+Linux ventunoq 6.8.0-1080-qcom #85-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul  9 20:29:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+
+=== Python ===
+Python 3.12.3
