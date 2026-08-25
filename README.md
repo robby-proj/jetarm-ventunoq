@@ -5,7 +5,7 @@
 **Documented baseline:** Git commit `5a44208`  
 **Private repository:** `git@github.com:robby-proj/jetarm-ventunoq.git`  
 **Target:** Ventuno Q + Hiwonder JetArm  
-**Runtime:** Debian / ROS 2 Jazzy / Arduino App Lab  
+**Runtime:** Ubuntu / ROS 2 Jazzy / Arduino App Lab  
 **Application:** `arduino-ai-roboarm-studio-v1-2`
 
 > **Source of truth:** The Git repository and baseline commit are authoritative. Deploy source files from Git; do not recreate `main.py` or the bridge manually from documentation snippets.
