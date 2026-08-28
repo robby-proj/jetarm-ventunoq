@@ -4,7 +4,7 @@
 
 **Version:** 1.1 (Ubuntu Edition)  
 **Documented baseline:** Git commit `5a44208`  
-**Private repository:** `git@github.com:robby-proj/jetarm-ventunoq.git`  
+**Repository:** `git@github.com:robby-proj/jetarm-ventunoq.git`  
 **Target:** Ventuno Q + Hiwonder JetArm  
 **Runtime:** Ubuntu / ROS 2 Jazzy / Arduino App Lab  
 **Application:** `arduino-ai-roboarm-studio-v1-2`
