@@ -187,7 +187,7 @@ Before cloning the application repository, verify that Ubuntu is running, ROS 2 
 
 ```bash
 cd /home/arduino
-git clone git@github.com:robby-proj/jetarm-ventunoq.git
+git clone git@github.com/robby-proj/jetarm-ventunoq.git
 cd jetarm-ventunoq
 git checkout 5a44208
 ```
