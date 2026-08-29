@@ -289,6 +289,212 @@ wc -l /home/hiwonder/jetarm_ros2_ws/app_lab_ros_bridge.py
 sha256sum /home/hiwonder/jetarm_ros2_ws/app_lab_ros_bridge.py
 grep -n "NORMAL conservative face tracking ENABLED" /home/hiwonder/jetarm_ros2_ws/app_lab_ros_bridge.py
 ```
+# Ventuno Q Display Persistence for Demo / Kiosk Use
+
+This guide configures the Ventuno Q display for unattended demo use.
+
+After configuration, the system will:
+
+* Automatically log in to the `arduino` desktop user
+* Disable screen blanking
+* Disable the lock screen
+* Disable display dimming
+* Disable suspend and hibernation
+* Keep the display active continuously after boot
+
+## 1. Enable Automatic Login
+
+Ventuno Q uses GDM for the graphical login manager.
+
+Edit:
+
+```bash
+sudo nano /etc/gdm3/custom.conf
+```
+
+Under the `[daemon]` section, configure:
+
+```ini
+[daemon]
+AutomaticLoginEnable=true
+AutomaticLogin=arduino
+```
+
+Verify:
+
+```bash
+grep -A8 '^\[daemon\]' /etc/gdm3/custom.conf
+```
+
+Expected:
+
+```text
+[daemon]
+
+AutomaticLoginEnable=true
+AutomaticLogin=arduino
+```
+
+---
+
+## 2. Disable Screen Blanking and Locking
+
+Run:
+
+```bash
+sudo -u arduino dbus-run-session -- bash -lc '
+gsettings set org.gnome.desktop.session idle-delay 0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+gsettings set org.gnome.desktop.lockdown disable-lock-screen true
+gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
+'
+```
+
+This disables GNOME idle blanking, screen locking, display dimming, and AC-powered automatic suspend.
+
+---
+
+## 3. Disable Linux Suspend and Hibernate
+
+For kiosk or trade-show operation, also disable system-level sleep modes:
+
+```bash
+sudo systemctl mask \
+sleep.target \
+suspend.target \
+hibernate.target \
+hybrid-sleep.target \
+suspend-then-hibernate.target
+```
+
+This prevents the system from entering suspend or hibernation even if a desktop power-management setting changes.
+
+---
+
+## 4. Verify the Configuration
+
+Run:
+
+```bash
+sudo -u arduino dbus-run-session -- bash -lc '
+echo "Screen blank:"
+gsettings get org.gnome.desktop.session idle-delay
+
+echo "Screen lock:"
+gsettings get org.gnome.desktop.screensaver lock-enabled
+
+echo "Screensaver:"
+gsettings get org.gnome.desktop.screensaver idle-activation-enabled
+
+echo "Disable lock screen:"
+gsettings get org.gnome.desktop.lockdown disable-lock-screen
+
+echo "Idle dim:"
+gsettings get org.gnome.settings-daemon.plugins.power idle-dim
+
+echo "AC suspend:"
+gsettings get org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
+'
+```
+
+Expected output:
+
+```text
+Screen blank:
+uint32 0
+
+Screen lock:
+false
+
+Screensaver:
+false
+
+Disable lock screen:
+true
+
+Idle dim:
+false
+
+AC suspend:
+'nothing'
+```
+
+Verify the system sleep targets are masked:
+
+```bash
+systemctl status \
+sleep.target \
+suspend.target \
+hibernate.target \
+hybrid-sleep.target \
+--no-pager
+```
+
+They should report that they are masked.
+
+---
+
+## 5. Reboot Test
+
+Reboot the Ventuno Q:
+
+```bash
+sudo reboot
+```
+
+After startup, verify that:
+
+1. The `arduino` user automatically enters the graphical desktop.
+2. No Linux login prompt is displayed.
+3. The screen remains active when the system is idle.
+4. No lock screen appears.
+5. The Ventuno Q does not suspend.
+
+## Expected Demo Behavior
+
+```text
+POWER ON
+    |
+    v
+Ventuno Q boots
+    |
+    v
+Automatic Login
+User: arduino
+    |
+    v
+GNOME Desktop
+    |
+    +-- No screen blanking
+    +-- No screen lock
+    +-- No display dimming
+    +-- No suspend
+    +-- No hibernation
+    |
+    v
+Display remains active for demo use
+```
+
+> **Security note:** Automatic login removes the password requirement at graphical startup. This configuration is intended for controlled kiosk, demonstration, laboratory, or trade-show systems where continuous unattended display operation is required.
+
+## Restore Normal Power Management
+
+To re-enable system sleep functionality:
+
+```bash
+sudo systemctl unmask \
+sleep.target \
+suspend.target \
+hibernate.target \
+hybrid-sleep.target \
+suspend-then-hibernate.target
+```
+
+Automatic login and GNOME power settings must be reverted separately if the device is returned to normal workstation use.
+
 
 ## 13. Troubleshooting highlights
 
