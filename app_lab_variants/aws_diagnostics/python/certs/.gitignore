@@ -1,0 +1,4 @@
+# Local AWS IoT identity material: NEVER COMMIT.
+*
+!.gitignore
+!README.md
