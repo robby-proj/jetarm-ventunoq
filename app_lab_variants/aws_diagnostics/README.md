@@ -761,11 +761,3 @@ Both handlers run the LLM call on a background thread, never on the MQTT network
 **What this can't do**: it can't detect actual servo wear or calibration drift directly — that calibration lives in the ROS 2 YAML config this app doesn't touch. "Service/calibration" suggestions are the LLM interpreting the tracked symptom counters, not a hardware fault diagnosis.
 
 ---
-
-## Why a Python Module Instead of a "Brick"
-
-Three shapes were considered for both cloud integrations:
-
-1. **Catalog Brick** (`from arduino.app_bricks.X import ...`, listed in `bricks_list`) — not creatable through App Lab's tools; requires Arduino's own brick-publishing pipeline.
-2. **Local custom brick** (`bricks/<id>/brick_compose.yaml`, a sidecar Docker container scoped to one app — the pattern the built-in MCP Gateway example uses) — technically possible, but adds an on-device Docker build and an internal API for no functional gain: still no secrets-UI, and certs still live in the app folder either way.
-3. **Plain reusable Python module** — chosen for AWS. `arduino_cloud` itself is only as simple as it looks because of a privileged, OS-level `arduino-cloud-connector` daemon built into the board image by Arduino, plus a dedicated App Lab Settings provisioning flow — a mechanism outside what app-level tooling can replicate.
